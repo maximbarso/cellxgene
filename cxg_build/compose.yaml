@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  cxgbuild:
+    build: 
+      dockerfile: ./Dockerfile
+    volumes:
+      - "../../cellxgene:/cellxgene"
+    command: ["sh", "-c", "cd cellxgene && make build"]
