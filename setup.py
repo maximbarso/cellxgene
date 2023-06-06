@@ -47,5 +47,5 @@ setup(
     ],
     entry_points={"console_scripts": ["cellxgene = server.cli.cli:cli",
                                       "cxgwebapp = cxgwebapp.cxgwebapp:cxgwebapp"]},
-    extras_require=dict(prepare=requirements_prepare, annotate=requirements_annotate, cxg=requirements_cxgwebapp),
+    extras_require=dict(prepare=requirements_prepare, annotate=requirements_annotate, cxgwebapp=requirements_cxgwebapp),
 )
