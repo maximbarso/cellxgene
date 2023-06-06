@@ -12,6 +12,9 @@ with open("server/requirements-prepare.txt") as fh:
 with open("server/requirements-annotate.txt") as fh:
     requirements_annotate = fh.read().splitlines()
 
+with open("cxgwebapp/requirements-cxgwebapp.txt") as fh:
+    requirements_cxgwebapp = fh.read().splitlines()
+
 setup(
     name="cellxgene",
     version="1.1.2",
@@ -42,6 +45,7 @@ setup(
         "Programming Language :: Python :: 3 :: Only",
         "Topic :: Scientific/Engineering :: Bio-Informatics",
     ],
-    entry_points={"console_scripts": ["cellxgene = server.cli.cli:cli"]},
-    extras_require=dict(prepare=requirements_prepare, annotate=requirements_annotate),
+    entry_points={"console_scripts": ["cellxgene = server.cli.cli:cli",
+                                      "cxgwebapp = cxgwebapp.cxgwebapp:cxgwebapp"]},
+    extras_require=dict(prepare=requirements_prepare, annotate=requirements_annotate, cxg=requirements_cxgwebapp),
 )
