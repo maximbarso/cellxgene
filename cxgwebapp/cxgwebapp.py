@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.wsgi import WSGIMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 import click
 from os.path import isfile
 from cxgwebapp import AppConfig, CliLaunchServer
@@ -12,6 +12,43 @@ from cxgwebapp import AppConfig, CliLaunchServer
 def cxgwebapp(datapath):
     """ """
     app = FastAPI()
+
+    # root
+    def gen_html_response():
+        html_content = """
+        <html>
+            <title>POINTCLOUDS</title>
+              <style type="text/css">
+                p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px Courier}
+                p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px Courier; min-height: 14.0px}
+                a:link {color:#000000; text-decoration:none;}
+                a:visited {color:#000000; text-decoration:none;}
+                a:hover {font-weight:bold;}
+                span.white {
+                  color:white;
+                }
+                pre {
+                  font: 17.0px Courier;
+                  width: 600px;
+                  position: relative;
+                }
+              </style>
+            </head>   
+            <body>
+            <pre>
+            <ul>
+                <li><a href="cxg/">CELLxGENE VIEWER.</a></li>
+                <li><a href="annos">ANNOTATIONS.</a></li>
+            </ul>
+            </pre>
+            </body>
+        </html>
+        """
+        return html_content
+
+    @app.get("/", response_class=HTMLResponse)
+    async def root():
+        return gen_html_response()
 
     # cxg
     app_config = AppConfig()
