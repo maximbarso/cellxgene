@@ -6,4 +6,4 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - "../../cellxgene:/cellxgene"
-    command: ["sh", "-c", "cd cellxgene && make build"]
+    command: ["sh", "-c", "chown -hR root:root /cellxgene && cd cellxgene && make build"]
